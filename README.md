@@ -7,6 +7,14 @@ Real-time global event monitor. Free data, no paid APIs.
 - Next.js, Tailwind, Leaflet
 - FastAPI, Python, SQLite
 
+## Live Demo
+
+**Note:** The backend is hosted on Render's free tier and sleeps after 15 minutes of inactivity. 
+> To view the live demo: 
+> 1. Visit the backend to wake it up: https://vigil-api-yxfk.onrender.com
+> 2. Wait ~60 seconds for it to spin up ({"status":"ok"}) will appear. 
+> 3. Then visit the frontend: https://vigil-pink.vercel.app
+
 ## Run
 
 ```bash
