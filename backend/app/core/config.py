@@ -6,9 +6,12 @@ class Settings(BaseSettings):
     debug: bool = True
     
     rss_feeds: list[str] = [
+        "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml",
         "https://feeds.bbci.co.uk/news/world/rss.xml",
-        "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
         "https://www.aljazeera.com/xml/rss/all.xml",
+        "https://feeds.reuters.com/reuters/worldNews",
+        "https://apnews.com/hub/middle-east/rss",
+        "https://www.theguardian.com/world/rss",
     ]
 
 @lru_cache()

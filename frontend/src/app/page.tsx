@@ -1,127 +1,219 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { startTransition, useDeferredValue, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import type { Event, GeoPoint, Stats, Severity } from '@/types';
+import Briefings from '@/components/Briefings';
+import Feed from '@/components/Feed';
+import HotspotList from '@/components/HotspotList';
+import type { MonitorData, Severity } from '@/types';
 
 const Map = dynamic(() => import('@/components/Map'), { ssr: false });
-import Feed from '@/components/Feed';
 
 const severities: Severity[] = ['critical', 'high', 'medium', 'low'];
 const colors: Record<Severity, string> = {
-  critical: '#ff3b30',
-  high: '#ff9500',
-  medium: '#ffcc00',
-  low: '#34c759',
+  critical: 'var(--critical)',
+  high: 'var(--high)',
+  medium: 'var(--medium)',
+  low: 'var(--low)',
 };
 
 export default function Home() {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [points, setPoints] = useState<GeoPoint[]>([]);
-  const [stats, setStats] = useState<Stats | null>(null);
-  const [filter, setFilter] = useState<Severity | null>(null);
+  const [data, setData] = useState<MonitorData | null>(null);
+  const [severityFilter, setSeverityFilter] = useState<Severity | null>(null);
+  const [regionFilter, setRegionFilter] = useState<string>('all');
   const [loading, setLoading] = useState(true);
-  
+
   const load = async () => {
     try {
-      const [evRes, geoRes, statsRes] = await Promise.all([
-        fetch('/api/v1/events').then(r => r.json()),
-        fetch('/api/v1/events/geo').then(r => r.json()),
-        fetch('/api/v1/events/stats').then(r => r.json()),
-      ]);
-      setEvents(evRes.events || []);
-      setPoints(geoRes.points || []);
-      setStats(statsRes);
+      const payload = await fetch('/api/v1/monitor').then((response) => response.json());
+      setData(payload);
     } catch (e) {
       console.error(e);
     } finally {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     load();
     const i = setInterval(load, 300000);
     return () => clearInterval(i);
   }, []);
-  
-  const filteredCount = filter 
-    ? points.filter(p => p.severity === filter).length 
-    : points.length;
-  
+
+  const deferredSeverity = useDeferredValue(severityFilter);
+  const deferredRegion = useDeferredValue(regionFilter);
+
+  const filteredEvents = (data?.events || []).filter((event) => {
+    const severityPass = !deferredSeverity || event.severity === deferredSeverity;
+    const regionPass = deferredRegion === 'all' || event.region_id === deferredRegion;
+    return severityPass && regionPass;
+  });
+
+  const filteredHotspots = (data?.hotspots || []).filter((hotspot) => {
+    const severityPass = !deferredSeverity || hotspot.severity === deferredSeverity;
+    const regionPass = deferredRegion === 'all' || hotspot.region_id === deferredRegion;
+    return severityPass && regionPass;
+  });
+
+  const filteredBriefings = (data?.briefings || []).filter((briefing) => {
+    const severityPass = !deferredSeverity || briefing.severity === deferredSeverity;
+    const regionPass = deferredRegion === 'all' || briefing.region_id === deferredRegion;
+    return severityPass && regionPass;
+  });
+
+  const updatedAt = data?.generated_at
+    ? new Date(data.generated_at).toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        timeZoneName: 'short',
+      })
+    : 'waiting for data';
+
   return (
-    <div className="h-screen flex flex-col bg-black">
-      {/* Header */}
-      <header className="flex-shrink-0 h-12 border-b border-[var(--border)] flex items-center justify-between px-4">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-white flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-black" />
+    <main className="min-h-screen bg-[var(--bg)] px-4 py-5 text-[var(--ink)] lg:px-6">
+      <div className="mx-auto max-w-[1580px]">
+        <section className="hero-shell">
+          <div className="hero-copy">
+            <p className="section-kicker">Middle East Monitor</p>
+            <h1 className="font-serif-display text-4xl leading-[1.05] text-[var(--ink-strong)] sm:text-5xl">
+              {data?.headline.title || 'Middle East pressure map'}
+            </h1>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--ink)] sm:text-lg">
+              {data?.headline.summary || 'Tracking the military, political, and humanitarian pressure points that are moving together across Iraq, Kurdistan, Syria, Lebanon, Gaza, Yemen, and the Gulf.'}
+            </p>
+
+            <div className="mt-5 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.18em] text-[var(--ink-faint)]">
+              <span>{updatedAt}</span>
+              <span>{data?.stats.live_signals || 0} live signals</span>
+              <span>{data?.stats.active_hotspots || 0} active hotspots</span>
+              <span>{data?.stats.briefings || 0} curated briefings</span>
+            </div>
           </div>
-          <span className="font-medium text-sm">Vigil</span>
-        </div>
-        
-        <div className="flex items-center gap-4">
-          {loading && (
-            <div className="w-3 h-3 border border-white/20 border-t-white rounded-full animate-spin" />
-          )}
-          <span className="text-xs text-[var(--text-dim)] mono">
-            {stats?.total || 0} events
-          </span>
-        </div>
-      </header>
-      
-      {/* Filter bar */}
-      <div className="flex-shrink-0 h-10 border-b border-[var(--border)] flex items-center gap-1 px-4">
-        <button
-          onClick={() => setFilter(null)}
-          className={`px-3 py-1 text-xs rounded-full transition-colors ${
-            filter === null 
-              ? 'bg-white text-black' 
-              : 'text-[var(--text-dim)] hover:text-white'
-          }`}
-        >
-          All
-        </button>
-        {severities.map(s => (
-          <button
-            key={s}
-            onClick={() => setFilter(filter === s ? null : s)}
-            className={`px-3 py-1 text-xs rounded-full transition-colors flex items-center gap-1.5 ${
-              filter === s 
-                ? 'bg-white/10 text-white' 
-                : 'text-[var(--text-dim)] hover:text-white'
-            }`}
-          >
-            <span 
-              className="w-1.5 h-1.5 rounded-full" 
-              style={{ backgroundColor: colors[s] }}
-            />
-            <span className="capitalize">{s}</span>
-            <span className="opacity-50">{stats?.severity[s] || 0}</span>
-          </button>
-        ))}
+
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="metric-card">
+              <span className="metric-label">Live signals</span>
+              <strong className="metric-value">{data?.stats.live_signals || 0}</strong>
+              <p className="metric-copy">Region-filtered articles mapped to monitored locations.</p>
+            </div>
+            <div className="metric-card">
+              <span className="metric-label">Critical hotspots</span>
+              <strong className="metric-value">{data?.stats.critical_hotspots || 0}</strong>
+              <p className="metric-copy">Flashpoints where military or humanitarian escalation is already acute.</p>
+            </div>
+            <div className="metric-card">
+              <span className="metric-label">Regions watched</span>
+              <strong className="metric-value">{data?.stats.monitored_regions || 0}</strong>
+              <p className="metric-copy">Iraq, Kurdistan, Syria, Lebanon, Gaza, Yemen, and Gulf lanes.</p>
+            </div>
+            <div className="metric-card">
+              <span className="metric-label">Curated briefs</span>
+              <strong className="metric-value">{data?.stats.briefings || 0}</strong>
+              <p className="metric-copy">Manual context layered over live reporting so quiet feeds do not erase the actual picture.</p>
+            </div>
+          </div>
+
+          <div className="panel flex flex-col gap-4 p-4">
+            <div>
+              <p className="section-kicker">Filter by region</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button
+                  onClick={() => startTransition(() => setRegionFilter('all'))}
+                  className={`pill ${regionFilter === 'all' ? 'pill-active' : ''}`}
+                >
+                  All theaters
+                </button>
+                {data?.stats.regions.map((region) => (
+                  <button
+                    key={region.id}
+                    onClick={() => startTransition(() => setRegionFilter(region.id))}
+                    className={`pill ${regionFilter === region.id ? 'pill-active' : ''}`}
+                  >
+                    {region.label} <span className="opacity-60">{region.count}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="section-kicker">Filter by severity</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button
+                  onClick={() => startTransition(() => setSeverityFilter(null))}
+                  className={`pill ${severityFilter === null ? 'pill-active' : ''}`}
+                >
+                  All severities
+                </button>
+                {severities.map((severity) => (
+                  <button
+                    key={severity}
+                    onClick={() => startTransition(() => setSeverityFilter(severityFilter === severity ? null : severity))}
+                    className={`pill ${severityFilter === severity ? 'pill-active' : ''}`}
+                  >
+                    <span className="h-2 w-2 rounded-full" style={{ backgroundColor: colors[severity] }} />
+                    <span className="capitalize">{severity}</span>
+                    <span className="opacity-60">{data?.stats.severity[severity] || 0}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-5 grid gap-4 xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)_minmax(0,390px)]">
+          <div className="space-y-4">
+            <Briefings briefings={filteredBriefings} />
+          </div>
+
+          <div className="space-y-4">
+            <div className="panel overflow-hidden p-5">
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <p className="section-kicker">Operational Picture</p>
+                  <h2 className="font-serif-display text-2xl text-[var(--ink-strong)]">Mapped pressure points</h2>
+                </div>
+                <p className="max-w-md text-right text-sm leading-6 text-[var(--ink-muted)]">
+                  This map stays centered on the Middle East and uses named hotspots rather than raw point spam, which keeps Kurdistan, U.S. military nodes, and shipping lanes visible even when article geocoding is weak.
+                </p>
+              </div>
+
+              <div className="mt-5 h-[540px] overflow-hidden rounded-[28px] border border-[var(--line)]">
+                <Map hotspots={filteredHotspots} />
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2 text-xs uppercase tracking-[0.18em] text-[var(--ink-faint)]">
+                <span>{filteredHotspots.length} mapped hotspots in view</span>
+                <span>{filteredEvents.length} linked live signals</span>
+                {loading && <span>refreshing</span>}
+              </div>
+            </div>
+
+            <HotspotList hotspots={filteredHotspots} />
+          </div>
+
+          <div className="space-y-4">
+            <Feed events={filteredEvents} />
+
+            <div className="panel p-5">
+              <p className="section-kicker">Method</p>
+              <h2 className="font-serif-display text-2xl text-[var(--ink-strong)]">How this monitor reads the region</h2>
+              <div className="mt-4 space-y-3 text-sm leading-6 text-[var(--ink)]">
+                <p>
+                  Live reporting is filtered down to theaters that matter for the current escalation: Iraq and Kurdistan, Syria, Lebanon, Gaza, Yemen, and the Gulf.
+                </p>
+                <p>
+                  A curated briefing layer keeps official and high-signal reporting visible, especially for U.S. military activity, Iranian attacks, and lower-volume places in Kurdistan that generic dashboards usually miss.
+                </p>
+                <p>
+                  Hotspots are ranked by baseline exposure plus recent reporting so a quiet hour does not make a serious place disappear.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      
-      {/* Main */}
-      <div className="flex-1 flex min-h-0">
-        {/* Map */}
-        <div className="flex-1 relative">
-          <Map points={points} filter={filter} />
-          <div className="absolute bottom-4 left-4 text-xs text-[var(--text-dim)] mono">
-            {filteredCount} mapped
-          </div>
-        </div>
-        
-        {/* Feed */}
-        <div className="w-80 border-l border-[var(--border)] flex flex-col">
-          <div className="flex-shrink-0 h-10 border-b border-[var(--border)] flex items-center px-4">
-            <span className="text-xs text-[var(--text-dim)]">Feed</span>
-          </div>
-          <div className="flex-1 overflow-auto p-2">
-            <Feed events={events} filter={filter} />
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
   );
 }

@@ -4,8 +4,8 @@ import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Vigil',
-  description: 'Global event monitor',
+  title: 'Vigil | Middle East Monitor',
+  description: 'Middle East monitoring dashboard focused on U.S. military activity, Iranian attacks, Kurdistan, and regional pressure points.',
   icons: {
     icon: '/icon.svg',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#000000',
+  themeColor: '#ede6da',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

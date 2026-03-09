@@ -1,0 +1,527 @@
+HOTSPOT_CATALOG = [
+    {
+        "id": "erbil-airport",
+        "name": "Erbil International Airport",
+        "region_id": "iraq-kurdistan",
+        "region": "Iraq / Kurdistan",
+        "country": "Iraq",
+        "lat": 36.2376,
+        "lng": 43.9632,
+        "aliases": ["erbil", "irbil", "erbil airport", "erbil international airport"],
+        "severity": "critical",
+        "emphasis": 5,
+        "summary": "Erbil remains the main U.S. and coalition pressure point inside Iraqi Kurdistan.",
+        "watch": ["drone approaches", "runway disruption", "air defense intercepts"],
+    },
+    {
+        "id": "harir-air-base",
+        "name": "Harir Air Base",
+        "region_id": "iraq-kurdistan",
+        "region": "Iraq / Kurdistan",
+        "country": "Iraq",
+        "lat": 36.6481,
+        "lng": 44.1452,
+        "aliases": ["harir", "harir air base", "harir base"],
+        "severity": "critical",
+        "emphasis": 5,
+        "summary": "Harir sits inside the same drone and missile envelope that covers Erbil.",
+        "watch": ["flightline damage", "air defense use", "U.S. force protection posture"],
+    },
+    {
+        "id": "khor-mor",
+        "name": "Khor Mor Gas Field",
+        "region_id": "iraq-kurdistan",
+        "region": "Iraq / Kurdistan",
+        "country": "Iraq",
+        "lat": 35.1849,
+        "lng": 45.0795,
+        "aliases": ["khor mor", "chamchamal", "gas field", "pearl petroleum"],
+        "severity": "high",
+        "emphasis": 4,
+        "summary": "Energy infrastructure in the Kurdistan Region is a recurring coercive target.",
+        "watch": ["power supply impact", "gas output", "civilian infrastructure damage"],
+    },
+    {
+        "id": "sulaimaniyah",
+        "name": "Sulaimaniyah",
+        "region_id": "iraq-kurdistan",
+        "region": "Iraq / Kurdistan",
+        "country": "Iraq",
+        "lat": 35.5571,
+        "lng": 45.4352,
+        "aliases": ["sulaimaniyah", "sulaymaniyah", "sulaymanah", "slemani"],
+        "severity": "high",
+        "emphasis": 3,
+        "summary": "Sulaimaniyah matters because it links Kurdish politics, aviation, and Iranian border pressure.",
+        "watch": ["airport activity", "party security", "border traffic"],
+    },
+    {
+        "id": "kirkuk-corridor",
+        "name": "Kirkuk - Hawija Corridor",
+        "region_id": "iraq-kurdistan",
+        "region": "Iraq / Kurdistan",
+        "country": "Iraq",
+        "lat": 35.4681,
+        "lng": 43.8592,
+        "aliases": ["kirkuk", "hawija", "dibis", "daquq"],
+        "severity": "high",
+        "emphasis": 3,
+        "summary": "The Kirkuk belt is where ISIS activity, Iraqi forces, and Kurdish security concerns overlap.",
+        "watch": ["ISIS cells", "ISF sweeps", "energy infrastructure"],
+    },
+    {
+        "id": "baghdad-airport",
+        "name": "Baghdad Airport Belt",
+        "region_id": "iraq-kurdistan",
+        "region": "Iraq / Kurdistan",
+        "country": "Iraq",
+        "lat": 33.2625,
+        "lng": 44.2346,
+        "aliases": ["baghdad airport", "baghdad international airport", "green zone", "baghdad"],
+        "severity": "high",
+        "emphasis": 4,
+        "summary": "Baghdad is still the political and logistical choke point for U.S. movement in Iraq.",
+        "watch": ["rocket fire", "green zone security", "airfield logistics"],
+    },
+    {
+        "id": "al-asad",
+        "name": "Al Asad Air Base",
+        "region_id": "iraq-kurdistan",
+        "region": "Iraq / Kurdistan",
+        "country": "Iraq",
+        "lat": 33.7856,
+        "lng": 42.4412,
+        "aliases": ["al asad", "ain al asad", "anbar base"],
+        "severity": "high",
+        "emphasis": 4,
+        "summary": "Al Asad remains one of the key U.S. military sites most exposed to militia retaliation.",
+        "watch": ["base defense", "proxy fire", "sortie tempo"],
+    },
+    {
+        "id": "hasakah",
+        "name": "Hasakah Detention Network",
+        "region_id": "syria",
+        "region": "Syria",
+        "country": "Syria",
+        "lat": 36.5024,
+        "lng": 40.7477,
+        "aliases": ["hasakah", "al hasakah", "qamishli", "qamishlo", "northeast syria"],
+        "severity": "high",
+        "emphasis": 4,
+        "summary": "The detention system in northeast Syria is a central anti-ISIS stability issue.",
+        "watch": ["detainee transfers", "SDF control", "detention site security"],
+    },
+    {
+        "id": "deir-ez-zor",
+        "name": "Deir ez-Zor River Belt",
+        "region_id": "syria",
+        "region": "Syria",
+        "country": "Syria",
+        "lat": 35.3359,
+        "lng": 40.1408,
+        "aliases": ["deir ez zor", "deir ezzor", "deir al zor", "euphrates valley"],
+        "severity": "high",
+        "emphasis": 4,
+        "summary": "Deir ez-Zor is the main corridor for ISIS reconstitution and cross-river friction.",
+        "watch": ["ISIS movement", "SDF patrols", "tribal unrest"],
+    },
+    {
+        "id": "palmyra",
+        "name": "Palmyra Axis",
+        "region_id": "syria",
+        "region": "Syria",
+        "country": "Syria",
+        "lat": 34.5480,
+        "lng": 38.2730,
+        "aliases": ["palmyra", "tadmur", "central syria"],
+        "severity": "critical",
+        "emphasis": 4,
+        "summary": "Palmyra sits at the center of the U.S. anti-ISIS response that followed the December ambush.",
+        "watch": ["ISIS ambush risk", "strike follow-on", "desert logistics"],
+    },
+    {
+        "id": "damascus",
+        "name": "Damascus",
+        "region_id": "syria",
+        "region": "Syria",
+        "country": "Syria",
+        "lat": 33.5138,
+        "lng": 36.2765,
+        "aliases": ["damascus", "syrian capital"],
+        "severity": "medium",
+        "emphasis": 2,
+        "summary": "Damascus is relevant because political bargaining there shapes the northeast security file.",
+        "watch": ["SDF integration talks", "state deployments", "airspace posture"],
+    },
+    {
+        "id": "south-lebanon",
+        "name": "South Lebanon Border Belt",
+        "region_id": "lebanon-israel",
+        "region": "Lebanon / Israel",
+        "country": "Lebanon",
+        "lat": 33.2786,
+        "lng": 35.2038,
+        "aliases": ["south lebanon", "tyre", "bint jbeil", "nabatieh", "border villages"],
+        "severity": "critical",
+        "emphasis": 5,
+        "summary": "South Lebanon is the main launch and retaliation corridor on the northern Israel front.",
+        "watch": ["cross-border fire", "evacuation orders", "civilian displacement"],
+    },
+    {
+        "id": "beirut-dahiyeh",
+        "name": "Beirut Southern Suburbs",
+        "region_id": "lebanon-israel",
+        "region": "Lebanon / Israel",
+        "country": "Lebanon",
+        "lat": 33.8520,
+        "lng": 35.5030,
+        "aliases": ["beirut", "dahiyeh", "southern suburbs", "beirut suburbs"],
+        "severity": "critical",
+        "emphasis": 5,
+        "summary": "Beirut's southern suburbs are the most visible urban flashpoint in the Lebanon theater.",
+        "watch": ["evacuation messaging", "urban strike density", "civil defense load"],
+    },
+    {
+        "id": "haifa",
+        "name": "Haifa and Northern Israel",
+        "region_id": "lebanon-israel",
+        "region": "Lebanon / Israel",
+        "country": "Israel",
+        "lat": 32.7940,
+        "lng": 34.9896,
+        "aliases": ["haifa", "northern israel", "galilee"],
+        "severity": "high",
+        "emphasis": 3,
+        "summary": "Haifa is a common reference point when Hezbollah widens its strike messaging.",
+        "watch": ["rocket alerts", "port operations", "civil defense"],
+    },
+    {
+        "id": "gaza-city",
+        "name": "Gaza City",
+        "region_id": "gaza",
+        "region": "Gaza",
+        "country": "Palestinian Territories",
+        "lat": 31.5017,
+        "lng": 34.4668,
+        "aliases": ["gaza", "gaza city", "northern gaza"],
+        "severity": "high",
+        "emphasis": 4,
+        "summary": "Gaza City concentrates humanitarian pressure, access constraints, and strike reporting.",
+        "watch": ["aid availability", "hospital load", "shelter density"],
+    },
+    {
+        "id": "rafah",
+        "name": "Rafah Crossing Belt",
+        "region_id": "gaza",
+        "region": "Gaza",
+        "country": "Palestinian Territories",
+        "lat": 31.2969,
+        "lng": 34.2435,
+        "aliases": ["rafah", "rafah crossing", "southern gaza", "kerem shalom", "zikim"],
+        "severity": "high",
+        "emphasis": 4,
+        "summary": "Crossing access around Rafah and Kerem Shalom still determines the aid picture.",
+        "watch": ["crossing status", "fuel entry", "medical evacuations"],
+    },
+    {
+        "id": "sanaa",
+        "name": "Sanaa",
+        "region_id": "yemen-red-sea",
+        "region": "Yemen / Red Sea",
+        "country": "Yemen",
+        "lat": 15.3694,
+        "lng": 44.1910,
+        "aliases": ["sanaa", "sana'a", "yemen capital"],
+        "severity": "high",
+        "emphasis": 3,
+        "summary": "Sanaa remains the political and strike-center reference point for the Yemen theater.",
+        "watch": ["launch claims", "airstrikes", "command nodes"],
+    },
+    {
+        "id": "hodeidah",
+        "name": "Hodeidah Coast",
+        "region_id": "yemen-red-sea",
+        "region": "Yemen / Red Sea",
+        "country": "Yemen",
+        "lat": 14.7978,
+        "lng": 42.9545,
+        "aliases": ["hodeidah", "hudaydah", "red sea port", "port of hodeidah"],
+        "severity": "critical",
+        "emphasis": 4,
+        "summary": "The Hodeidah coast is tied directly to Red Sea maritime disruption.",
+        "watch": ["anti-ship launches", "port damage", "coastal radar activity"],
+    },
+    {
+        "id": "bab-el-mandeb",
+        "name": "Bab el-Mandeb",
+        "region_id": "yemen-red-sea",
+        "region": "Yemen / Red Sea",
+        "country": "Red Sea",
+        "lat": 12.5850,
+        "lng": 43.3333,
+        "aliases": ["bab el mandeb", "bab al mandab", "red sea shipping", "gulf of aden"],
+        "severity": "critical",
+        "emphasis": 5,
+        "summary": "Bab el-Mandeb is still the quickest indicator of whether the maritime crisis is widening.",
+        "watch": ["merchant vessel routes", "escort operations", "war risk premiums"],
+    },
+    {
+        "id": "strait-of-hormuz",
+        "name": "Strait of Hormuz",
+        "region_id": "gulf",
+        "region": "Gulf and U.S. Force Posture",
+        "country": "Oman / Iran",
+        "lat": 26.5667,
+        "lng": 56.2500,
+        "aliases": ["strait of hormuz", "hormuz", "gulf shipping", "tankers", "maritime insurers"],
+        "severity": "critical",
+        "emphasis": 5,
+        "summary": "Hormuz is the strategic seam between Iranian retaliation and global energy disruption.",
+        "watch": ["tanker queue", "escort missions", "commercial rerouting"],
+    },
+    {
+        "id": "camp-arifjan",
+        "name": "Camp Arifjan",
+        "region_id": "gulf",
+        "region": "Gulf and U.S. Force Posture",
+        "country": "Kuwait",
+        "lat": 28.9386,
+        "lng": 47.7450,
+        "aliases": ["camp arifjan", "kuwait", "ali al salem", "camp buehring"],
+        "severity": "critical",
+        "emphasis": 4,
+        "summary": "Kuwait-based U.S. facilities are central to air defense and theater sustainment.",
+        "watch": ["base alerts", "interceptor inventory", "sortie generation"],
+    },
+]
+
+SITUATION_BRIEFS = [
+    {
+        "id": "iraq-kurdistan-brief",
+        "title": "Iraq and Kurdistan Front",
+        "region_id": "iraq-kurdistan",
+        "region": "Iraq / Kurdistan",
+        "severity": "critical",
+        "last_verified": "2026-03-09",
+        "summary": "This front now mixes Iranian retaliation, militia pressure, U.S. force protection, and Kurdish political risk in one theater.",
+        "bullets": [
+            "Drone pressure around Erbil has become one of the clearest indicators of how directly Iranian retaliation is reaching U.S. positions in Iraq.",
+            "Reporting on March 4 and March 6 described renewed attention on Iraqi Kurdistan, including Iranian Kurdish armed groups based near Erbil and the wider risk that northern Iraq is dragged deeper into the conflict.",
+            "The part that often gets missed is the Kurdistan interior: Harir, Khor Mor, Sulaimaniyah, Kirkuk, and the border approaches matter as much as the airport itself because they carry the military, political, and energy risk."
+        ],
+        "watchpoints": [
+            "Erbil airport access and base-defense activity",
+            "Harir airfield disruption or dispersal",
+            "Khor Mor or grid-linked energy incidents",
+            "Any strike language tied to Iranian Kurdish opposition groups"
+        ],
+        "hotspots": ["erbil-airport", "harir-air-base", "khor-mor", "sulaimaniyah", "kirkuk-corridor", "baghdad-airport", "al-asad"],
+        "sources": [
+            {
+                "label": "Al Jazeera / AP / Reuters on Iranian drone waves aimed at Erbil and Gulf bases",
+                "publisher": "Al Jazeera",
+                "date": "2026-03-04",
+                "url": "https://www.aljazeera.com/news/2026/3/4/hundreds-of-drones-target-kuwait-iraq-saudi-arabia-uae-amid-iran-war"
+            },
+            {
+                "label": "Reuters video wire on pro-Iranian drone attack near Erbil airport",
+                "publisher": "Reuters",
+                "date": "2026-03-01",
+                "url": "https://www.reutersconnect.com/item/pro-iranian-groups-drones-target-us-military-base-in-iraqs-erbil/dGFnOnJldXRlcnMuY29tLDIwMjY6bmV3c21sX1ZBOTc5NDAxMDMyMDI2UlAx"
+            },
+            {
+                "label": "AP interview with Iranian Kurdish dissidents in Erbil",
+                "publisher": "AP",
+                "date": "2026-03-06",
+                "url": "https://www.washingtonpost.com/world/2026/03/06/kurds-iran-iraq-us/7788cb6e-1978-11f1-aef0-0aac8e8e94db_story.html"
+            }
+        ]
+    },
+    {
+        "id": "syria-brief",
+        "title": "Syria Anti-ISIS File",
+        "region_id": "syria",
+        "region": "Syria",
+        "severity": "high",
+        "last_verified": "2026-03-09",
+        "summary": "U.S. operations in Syria are narrower than before, but still active enough that any strike, detainee transfer, or SDF security failure can move the whole regional picture.",
+        "bullets": [
+            "CENTCOM said on February 4 and February 14 that Operation Hawkeye Strike hit ISIS infrastructure and weapons sites across Syria after the December Palmyra ambush that killed two U.S. service members and an interpreter.",
+            "On February 13, CENTCOM said U.S. forces had completed a 23-day air transfer mission moving more than 5,700 ISIS detainees from northeastern Syria to Iraq.",
+            "That keeps Hasakah, Deir ez-Zor, and Palmyra relevant even when the headline focus shifts to Iran, because detention security and ISIS regeneration still sit underneath the wider war."
+        ],
+        "watchpoints": [
+            "Detention facility stability in northeast Syria",
+            "Follow-on U.S. strikes around Palmyra or central desert routes",
+            "Any change in SDF control around Hasakah and Qamishli",
+            "Cross-border movement between Syria and Iraq"
+        ],
+        "hotspots": ["hasakah", "deir-ez-zor", "palmyra", "damascus"],
+        "sources": [
+            {
+                "label": "CENTCOM strike update on ISIS targets in Syria",
+                "publisher": "CENTCOM",
+                "date": "2026-02-04",
+                "url": "https://www.centcom.mil/MEDIA/PRESS-RELEASES/Press-Release-View/Article/4397247/us-forces-strike-isis-targets-in-syria-as-partners-sustain-pressure/"
+            },
+            {
+                "label": "CENTCOM follow-on strikes under Operation Hawkeye Strike",
+                "publisher": "CENTCOM",
+                "date": "2026-02-14",
+                "url": "https://www.centcom.mil/MEDIA/PRESS-RELEASES/Press-Release-View/Article/4407029/us-forces-continue-strikes-on-isis-targets-in-syria/"
+            },
+            {
+                "label": "CENTCOM detainee transfer mission from Syria to Iraq",
+                "publisher": "CENTCOM",
+                "date": "2026-02-13",
+                "url": "https://www.centcom.mil/MEDIA/PRESS-RELEASES/Press-Release-View/Article/4406293/us-forces-complete-mission-in-syria-to-transfer-isis-detainees-to-iraq/"
+            }
+        ]
+    },
+    {
+        "id": "gulf-brief",
+        "title": "Gulf and U.S. Force Posture",
+        "region_id": "gulf",
+        "region": "Gulf and U.S. Force Posture",
+        "severity": "critical",
+        "last_verified": "2026-03-09",
+        "summary": "The Gulf picture is not just about Iran itself. It is about whether U.S. bases, tanker routes, and Arab partner air defenses can absorb repeated retaliation.",
+        "bullets": [
+            "Official U.S. material released on March 1 described Operation Epic Fury as a theater-wide effort targeting Iranian command, air defense, missile, and naval nodes after the February 28 start of U.S. strikes.",
+            "AP reported Gulf officials were angry that Washington did not fully prepare them for the scale of Iranian retaliation, which included drones and missiles aimed at states hosting U.S. forces.",
+            "Reuters reporting on March 2 said shipping through the Strait of Hormuz had nearly halted after attacks damaged or stranded tankers, linking the military campaign directly to energy and insurance disruption."
+        ],
+        "watchpoints": [
+            "Interceptions or damage at Kuwait-based U.S. facilities",
+            "Patriot or THAAD expenditure rates",
+            "Hormuz escort missions and vessel backlogs",
+            "New Iranian claims of attacks on Gulf oil or diplomatic sites"
+        ],
+        "hotspots": ["strait-of-hormuz", "camp-arifjan", "erbil-airport", "al-asad"],
+        "sources": [
+            {
+                "label": "CENTCOM fact sheet for Operation Epic Fury",
+                "publisher": "CENTCOM",
+                "date": "2026-03-01",
+                "url": "https://www.centcom.mil/Portals/6/Documents/Publications/260301-Fact%20Sheet.pdf"
+            },
+            {
+                "label": "AP on Gulf allies complaining they were not warned about Iran fallout",
+                "publisher": "AP",
+                "date": "2026-03-06",
+                "url": "https://apnews.com/article/69d5bc227e468f06e20e5ad069330c7d"
+            },
+            {
+                "label": "Reuters on tankers stranded and damaged around Hormuz",
+                "publisher": "Reuters",
+                "date": "2026-03-02",
+                "url": "https://www.investing.com/news/commodities-news/iran-conflict-disrupts-global-shipping-as-tankers-are-stranded-damaged-4534475"
+            }
+        ]
+    },
+    {
+        "id": "yemen-red-sea-brief",
+        "title": "Yemen and Red Sea Shipping",
+        "region_id": "yemen-red-sea",
+        "region": "Yemen / Red Sea",
+        "severity": "high",
+        "last_verified": "2026-03-09",
+        "summary": "Even with the Gulf taking more attention, the Red Sea lane still matters because shipping stress moves quickly between Bab el-Mandeb and Hormuz.",
+        "bullets": [
+            "Bab el-Mandeb remains the clearest overlap point between maritime risk, missile warning posture, and commercial rerouting.",
+            "The same risk language now appears in both Gulf and Red Sea reporting: insurers, shippers, and escort planners are pricing for repeated drone or missile disruption rather than isolated incidents.",
+            "For monitoring purposes, the practical question is whether Hodeidah, Sanaa, and Gulf of Aden reporting starts appearing in the same burst as Hormuz disruption."
+        ],
+        "watchpoints": [
+            "Merchant vessel rerouting around Bab el-Mandeb",
+            "Launch claims tied to Hodeidah coast",
+            "U.S. or partner escort posture in the Gulf of Aden",
+            "War-risk insurance suspensions"
+        ],
+        "hotspots": ["sanaa", "hodeidah", "bab-el-mandeb", "strait-of-hormuz"],
+        "sources": [
+            {
+                "label": "Reuters on maritime disruption spreading through the Gulf shipping system",
+                "publisher": "Reuters",
+                "date": "2026-03-02",
+                "url": "https://www.investing.com/news/commodities-news/iran-conflict-disrupts-global-shipping-as-tankers-are-stranded-damaged-4534475"
+            },
+            {
+                "label": "Lloyd's List on tankers stranded after Hormuz closure",
+                "publisher": "Lloyd's List",
+                "date": "2026-03-03",
+                "url": "https://www.lloydslist.com/LL1156500/Around-200-compliant-tankers-stranded-as-Strait-of-Hormuz-closure-freezes-Gulf-traffic"
+            }
+        ]
+    },
+    {
+        "id": "lebanon-israel-brief",
+        "title": "Lebanon and Northern Israel",
+        "region_id": "lebanon-israel",
+        "region": "Lebanon / Israel",
+        "severity": "critical",
+        "last_verified": "2026-03-09",
+        "summary": "The Lebanon front has shifted back into a high-intensity exchange cycle, with Beirut and the southern border both inside the strike pattern.",
+        "bullets": [
+            "On March 2, Hezbollah said it launched rockets and drones after the killing of Iran's supreme leader, and Israeli strikes followed in Beirut and across Lebanon.",
+            "By March 6, Al Jazeera and wire reporting said the death toll from Israeli attacks in Lebanon had climbed sharply and displacement was spreading again.",
+            "This front matters beyond Lebanon itself because it forces Israel, Hezbollah, and Iran's network into simultaneous escalation decisions."
+        ],
+        "watchpoints": [
+            "Evacuation warnings in Beirut's southern suburbs",
+            "Cross-border fire around south Lebanon and Haifa",
+            "Civilian displacement into Beirut schools and shelters",
+            "Any sign of wider regional coordination with Iraq or Yemen"
+        ],
+        "hotspots": ["south-lebanon", "beirut-dahiyeh", "haifa"],
+        "sources": [
+            {
+                "label": "Al Jazeera on Israeli strikes after Hezbollah rocket attack",
+                "publisher": "Al Jazeera",
+                "date": "2026-03-02",
+                "url": "https://www.aljazeera.com/news/2026/3/2/israel-bombs-beirut-after-hezbollah-launches-rocket-attack"
+            },
+            {
+                "label": "Al Jazeera on Beirut, south, and east Lebanon strikes",
+                "publisher": "Al Jazeera",
+                "date": "2026-03-06",
+                "url": "https://www.aljazeera.com/news/2026/3/6/death-toll-in-israels-lebanon-attacks-over-120-as-beirut-south-east-hit"
+            }
+        ]
+    },
+    {
+        "id": "gaza-brief",
+        "title": "Gaza Humanitarian Access",
+        "region_id": "gaza",
+        "region": "Gaza",
+        "severity": "high",
+        "last_verified": "2026-03-09",
+        "summary": "Gaza still needs to be read as a humanitarian access problem and a military escalation problem at the same time.",
+        "bullets": [
+            "OCHA's March 6 humanitarian response update said the regional escalation quickly worsened conditions in Gaza and the West Bank, especially after crossing closures and aid disruptions.",
+            "The same update said fuel, movement coordination, staff rotations, and medical evacuations were all affected, with commodity prices rising and services being rationed.",
+            "For this monitor, Rafah, Kerem Shalom, Gaza City, and hospital-service reporting are the core indicators to watch."
+        ],
+        "watchpoints": [
+            "Kerem Shalom fuel and aid throughput",
+            "Rafah crossing status",
+            "Hospital fuel reserves and desalination output",
+            "Medical evacuation pauses"
+        ],
+        "hotspots": ["gaza-city", "rafah"],
+        "sources": [
+            {
+                "label": "OCHA humanitarian response update for the OPT",
+                "publisher": "OCHA",
+                "date": "2026-03-06",
+                "url": "https://www.ochaopt.org/content/opt-humanitarian-response-6-march-2026"
+            },
+            {
+                "label": "UNISPAL archive of OCHA Gaza humanitarian update",
+                "publisher": "UN",
+                "date": "2026-02-12",
+                "url": "https://www.un.org/unispal/document/ocha-humanitarian-situation-update-357-gaza-strip/"
+            }
+        ]
+    },
+]

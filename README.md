@@ -1,11 +1,18 @@
 # Vigil
 
-Real-time global event monitor. Free data, no paid APIs.
+Middle East monitoring dashboard built around named hotspots, curated regional briefings, and live reporting feeds.
 
 ## Stack
 
 - Next.js, Tailwind, Leaflet
-- FastAPI, Python, SQLite
+- FastAPI, Python
+
+## What Changed
+
+- The app is now centered on the Middle East instead of acting like a generic world feed.
+- Iraq and the Kurdistan Region have their own hotspot model, including Erbil, Harir, Khor Mor, Sulaimaniyah, Kirkuk, Baghdad, and Al Asad.
+- The dashboard now carries deeper regional briefings covering U.S. military activity, Iranian attacks, Syria's anti-ISIS file, Lebanon, Gaza, Yemen, and Gulf shipping lanes.
+- Mapping is hotspot-based rather than raw-dot based, so important places stay visible even when source geocoding is poor.
 
 ## Live Demo
 
@@ -31,6 +38,6 @@ Open http://localhost:3000
 
 ## Data
 
-- GDELT Project (free, updates every 15 min)
-- RSS feeds (BBC, Reuters, Al Jazeera)
-- CartoDB dark tiles
+- RSS feeds from BBC, Reuters, AP, Al Jazeera, and The Guardian
+- Curated situation briefs with source links
+- CartoDB basemap tiles

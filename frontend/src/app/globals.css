@@ -4,16 +4,29 @@
 @tailwind utilities;
 
 :root {
-  --bg: #000000;
-  --surface: #0a0a0a;
-  --border: #1a1a1a;
-  --text: #e5e5e5;
-  --text-dim: #666666;
-  --accent: #ffffff;
-  --critical: #ff3b30;
-  --high: #ff9500;
-  --medium: #ffcc00;
-  --low: #34c759;
+  --bg: #ede6da;
+  --surface: rgba(250, 246, 239, 0.82);
+  --surface-2: #e4d8c5;
+  --line: rgba(105, 84, 58, 0.14);
+  --line-strong: rgba(105, 84, 58, 0.28);
+  --ink: #43372b;
+  --ink-strong: #271d16;
+  --ink-muted: #6b5c4d;
+  --ink-faint: #8d7d6b;
+  --accent: #8f3b2a;
+  --critical: #b93c2f;
+  --high: #cc6d32;
+  --medium: #c79f42;
+  --low: #4f6f5b;
+  --critical-soft: rgba(185, 60, 47, 0.12);
+  --high-soft: rgba(204, 109, 50, 0.12);
+  --medium-soft: rgba(199, 159, 66, 0.12);
+  --critical-line: rgba(185, 60, 47, 0.24);
+  --high-line: rgba(204, 109, 50, 0.22);
+  --medium-line: rgba(199, 159, 66, 0.22);
+  --critical-ink: #7d2119;
+  --high-ink: #8f4d1f;
+  --medium-ink: #7c6126;
 }
 
 * {
@@ -24,36 +37,128 @@ html, body {
   margin: 0;
   padding: 0;
   background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--ink);
+  font-family: var(--font-geist), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+body {
+  background-image:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.7), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(165, 111, 73, 0.08), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(237, 230, 218, 0.95));
+}
+
 ::selection {
-  background: rgba(255,255,255,0.1);
+  background: rgba(143, 59, 42, 0.18);
 }
 
 .mono {
-  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-family: var(--font-geist-mono), 'SF Mono', 'Fira Code', monospace;
   font-size: 0.85em;
+}
+
+.font-serif-display {
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+}
+
+.hero-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.hero-copy {
+  padding: 1rem 0 0.25rem;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  border-radius: 30px;
+  box-shadow: 0 12px 40px rgba(74, 55, 33, 0.08);
+}
+
+.metric-card {
+  border: 1px solid var(--line);
+  background: rgba(250, 246, 239, 0.82);
+  border-radius: 26px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 10px 28px rgba(74, 55, 33, 0.06);
+}
+
+.metric-label {
+  display: block;
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.metric-value {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--ink-strong);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.metric-copy {
+  margin-top: 0.7rem;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.52);
+  color: var(--ink-muted);
+  padding: 0.65rem 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 160ms ease;
+}
+
+.pill:hover {
+  border-color: var(--line-strong);
+  color: var(--ink-strong);
+}
+
+.pill-active {
+  border-color: rgba(143, 59, 42, 0.22);
+  background: rgba(143, 59, 42, 0.1);
+  color: var(--ink-strong);
+}
+
+.section-kicker {
+  color: var(--ink-faint);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 /* Leaflet */
 .leaflet-container {
-  background: #000 !important;
+  background: #e8decf !important;
 }
 
-.leaflet-control-attribution,
 .leaflet-control-zoom {
   display: none !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background: var(--surface) !important;
-  color: var(--text) !important;
-  border-radius: 8px !important;
-  border: 1px solid var(--border) !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.8) !important;
+  background: rgba(250, 246, 239, 0.96) !important;
+  color: var(--ink) !important;
+  border-radius: 18px !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 16px 40px rgba(40, 26, 18, 0.18) !important;
 }
 
 .leaflet-popup-content {
@@ -61,12 +166,34 @@ html, body {
 }
 
 .leaflet-popup-tip {
-  background: var(--surface) !important;
-  border: 1px solid var(--border) !important;
+  background: rgba(250, 246, 239, 0.96) !important;
+  border: 1px solid var(--line) !important;
 }
 
 .leaflet-popup-close-button {
-  color: var(--text-dim) !important;
+  color: var(--ink-faint) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(250, 246, 239, 0.7) !important;
+  color: var(--ink-faint) !important;
+}
+
+.leaflet-tooltip.map-tooltip {
+  border: 1px solid var(--line) !important;
+  border-radius: 999px !important;
+  background: rgba(250, 246, 239, 0.92) !important;
+  color: var(--ink-strong) !important;
+  box-shadow: 0 8px 20px rgba(40, 26, 18, 0.12);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 10px !important;
+  text-transform: uppercase;
+}
+
+.leaflet-tooltip.map-tooltip::before {
+  display: none;
 }
 
 /* Scrollbar */
@@ -79,6 +206,6 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: rgba(105, 84, 58, 0.2);
   border-radius: 3px;
 }
